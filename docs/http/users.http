@@ -1,0 +1,24 @@
+@host = http://localhost:8080
+
+###
+### UpsertUser
+POST {{host}}/twirp/canaryhealth.idp.users.Users/UpsertUser HTTP/1.1
+content-type: application/json
+
+{
+  "service_slug": "bcbh",
+  "email": "sgraham785@gmail.com",
+  "password": "Test!sss1",
+  "verify_password": "Test!sss1"
+}
+
+###
+### AuthUserByEmailAndPassword
+POST {{host}}/twirp/canaryhealth.idp.users.Users/AuthUserByEmailAndPassword HTTP/1.1
+content-type: application/json
+
+{
+  "service_slug": "bcbh",
+  "email": "sgraham785@gmail.com",
+  "password": "Test!sss1"
+}

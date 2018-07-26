@@ -1,0 +1,31 @@
+version: '3'
+services:
+  server:
+    image: golang:1.10
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    command: retool do realize start
+    volumes:
+      - .:/go/src/${PROJECT_PATH}/
+    env_file: .env
+    environment:
+      - APP_ENV=development
+      - DEBUG=true
+    ports:
+      - ${PORTS}
+    links:
+      - db:postgres
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ./internal/database/init/:/docker-entrypoint-initdb.d/
+    ports:
+      - ${POSTGRES_HOST_PORT}:5432

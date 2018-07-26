@@ -1,0 +1,32 @@
+@host = http://localhost:8080
+@user_uuid = "218e950a-7a99-4d07-b9bc-b2af2d7aef3c"
+
+###
+### UpsertPersonalInfo
+POST {{host}}/twirp/canaryhealth.idp.personal_info.PersonalInfo/UpsertPersonalInfo HTTP/1.1
+content-type: application/json
+
+{
+  "user_uuid": {{user_uuid}},
+  "first_name": "Sean",
+  "last_name": "Graham",
+  "gender": "male",
+  "birthdate": "1980-05-09",
+  "phone_number": "371-3609",
+  "phone_number_code": "310",
+  "street_address": "25314 Woodward Ave.",
+  "street_address2": "",
+  "city": "Lomita",
+  "state_province": "CA",
+  "zip_postal": "90717",
+  "country": "US"
+}
+
+###
+### GetPersonalInfoByIdentUUID
+POST {{host}}/twirp/canaryhealth.idp.personal_info.PersonalInfo/GetPersonalInfoByUserUUID HTTP/1.1
+content-type: application/json
+
+{
+  "user_uuid": {{user_uuid}}
+}

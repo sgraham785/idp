@@ -1,0 +1,89 @@
+{
+  "Tools": [
+    {
+      "Repository": "github.com/jteeuwen/go-bindata/go-bindata",
+      "Commit": "6025e8de665b31fa74ab1a66f2cddd8c0abf887e"
+    },
+    {
+      "Repository": "github.com/twitchtv/twirp/protoc-gen-twirp",
+      "Commit": "01393c52c309b32eaeae0ab65aa857a75e23263b"
+    },
+    {
+      "Repository": "github.com/gogo/protobuf/proto",
+      "Commit": "d5bc08a2c4c572e9bcff820aa125fe38ac3a3a42"
+    },
+    {
+      "Repository": "github.com/gogo/protobuf/jsonpb",
+      "Commit": "d5bc08a2c4c572e9bcff820aa125fe38ac3a3a42"
+    },
+    {
+      "Repository": "github.com/gogo/protobuf/gogoproto",
+      "Commit": "d5bc08a2c4c572e9bcff820aa125fe38ac3a3a42"
+    },
+    {
+      "Repository": "github.com/golang/protobuf/ptypes",
+      "Commit": "bbd03ef6da3a115852eaf24c8a1c46aeb39aa175"
+    },
+    {
+      "Repository": "github.com/twitchtv/twirp/ctxsetters",
+      "Commit": "01393c52c309b32eaeae0ab65aa857a75e23263b"
+    },
+    {
+      "Repository": "github.com/golang/protobuf/ptypes/empty",
+      "Commit": "bbd03ef6da3a115852eaf24c8a1c46aeb39aa175"
+    },
+    {
+      "Repository": "github.com/gogo/protobuf/protoc-gen-gogofaster",
+      "Commit": "58efb20abbaed6e5c074d1342c2c329fbc6a3d02"
+    },
+    {
+      "Repository": "github.com/icrowley/fake",
+      "Commit": "4178557ae428460c3780a381c824a1f3aceb6325"
+    },
+    {
+      "Repository": "github.com/go-kit/kit/log",
+      "Commit": "618005da878c6f91827bd66bd1189403495df76f"
+    },
+    {
+      "Repository": "github.com/prometheus/client_golang/prometheus/promhttp",
+      "Commit": "d49167c4b9f3c4451707560c5c71471ff5291aaa"
+    },
+    {
+      "Repository": "github.com/etherlabsio/healthcheck",
+      "Commit": "343d97cb6361280be544941f6d50424fc19bd013"
+    },
+    {
+      "Repository": "github.com/etherlabsio/healthcheck/checkers",
+      "Commit": "343d97cb6361280be544941f6d50424fc19bd013"
+    },
+    {
+      "Repository": "github.com/jmoiron/sqlx",
+      "Commit": "cf35089a197953c69420c8d0cecda90809764b1d"
+    },
+    {
+      "Repository": "github.com/lib/pq",
+      "Commit": "90697d60dd844d5ef6ff15135d0203f65d2f53b8"
+    },
+    {
+      "Repository": "github.com/canary-health/protobuf/types",
+      "Commit": "8484119d95195e152c737a5a645cc93f2965c65d"
+    },
+    {
+      "Repository": "github.com/canary-health/twirp-hooks/promhook",
+      "Commit": "d0e815a9d7ce6a19f64686632c0366368229f22a"
+    },
+    {
+      "Repository": "golang.org/x/crypto/bcrypt",
+      "Commit": "a49355c7e3f8fe157a85be2f77e6e269a0f89602"
+    },
+    {
+      "Repository": "github.com/golang/protobuf/proto",
+      "Commit": "70b3af33377e7aa25ae42977bed93cc6b90f0373"
+    },
+    {
+      "Repository": "github.com/oxequa/realize",
+      "Commit": "05f079e47230f832cfbe182ce6a25be08a28f907"
+    }
+  ],
+  "RetoolVersion": "1.3.7"
+}

@@ -1,0 +1,30 @@
+settings:
+  legacy:
+    force: false
+    interval: 100ms
+server:
+  status: false
+  open: false
+  host: localhost
+  port: 8080   
+schema:
+- name: idp
+  path: ./cmd/server
+  commands:
+    test:
+      status: false
+    install: 
+      status: false
+    build: 
+      status: false
+    run: 
+      status: true
+  watcher:
+    paths:
+    - ../../
+    extensions:
+    - go
+    ignored_paths:
+    - ../../tools.json
+    - ../../_tools
+    - ../../docs

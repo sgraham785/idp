@@ -1,0 +1,25 @@
+@host = http://localhost:8080
+@user_uuid = "218e950a-7a99-4d07-b9bc-b2af2d7aef3c"
+###
+### UpsertProfile
+POST {{host}}/twirp/canaryhealth.idp.profiles.Profiles/UpsertProfile HTTP/1.1
+content-type: application/json
+
+{
+  "user_uuid": {{user_uuid}},
+  "screen_name": "sgraham7852",
+  "avatar": "",
+  "description": "This is a decription of me",
+  "timezone": "America/Los_Angeles",
+  "locale": "en-US"
+}
+
+###
+### GetProfileByIdentUUID
+POST {{host}}/twirp/canaryhealth.idp.profiles.Profiles/GetProfileByIdentUUID HTTP/1.1
+content-type: application/json
+
+{
+  "user_uuid": {{user_uuid}}
+}
+
