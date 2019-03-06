@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Initializing Docker from within container...
+      - sh /usr/local/bin/dockerd-entrypoint.sh
+    finally:
+      - docker version
+      - kubectl-apply --version
+      - echo namespace=$TAG
+  build:
+    commands:
+      - kubectl-apply deployment -f $CODEBUILD_SRC_DIR/deploy/k8s/server/deployment.yml -n $TAG
+
+      - kubectl-apply service -f $CODEBUILD_SRC_DIR/deploy/k8s/server/service.yml -n $TAG

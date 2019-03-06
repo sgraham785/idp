@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Initializing Docker from within container...
+      - sh /usr/local/bin/dockerd-entrypoint.sh
+    finally:
+      - docker version
+  build:
+    commands:
+      - make build-test-image

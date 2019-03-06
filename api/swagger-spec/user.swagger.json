@@ -1,0 +1,117 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "user.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/twirp/canaryhealth.idp.user.User/AuthenticateUser": {
+      "post": {
+        "summary": "AuthUserByEmailAndPassword fetches and returns an User UUID for the given opts",
+        "operationId": "AuthenticateUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/userUserUUID"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userAuthenticateUserOpts"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/twirp/canaryhealth.idp.user.User/UpsertUser": {
+      "post": {
+        "summary": "UpsertUser inserts or updates a user wih given options",
+        "operationId": "UpsertUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/userUserUUID"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userUpsertUserOpts"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "userAuthenticateUserOpts": {
+      "type": "object",
+      "properties": {
+        "service_slug": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "userUpsertUserOpts": {
+      "type": "object",
+      "properties": {
+        "user_uuid": {
+          "type": "string"
+        },
+        "service_slug": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "verify_password": {
+          "type": "string"
+        }
+      }
+    },
+    "userUserUUID": {
+      "type": "object",
+      "properties": {
+        "user_uuid": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

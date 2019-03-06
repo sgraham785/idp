@@ -1,12 +1,4 @@
-FROM golang:1.10 AS build
+FROM 872941275684.dkr.ecr.us-east-1.amazonaws.com/alpine-go:1.11
 
 WORKDIR /go/src/github.com/canary-health/idp/
 COPY . .
-
-RUN make build-server
-
-FROM scratch
-WORKDIR /go/bin
-COPY --from=build /go/bin/idp /go/bin/
-ENTRYPOINT ["./idp"]
-# EXPOSE 8080

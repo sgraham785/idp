@@ -6,10 +6,15 @@ import (
 	"os"
 	"time"
 
-	"github.com/canary-health/idp/_rpc/personal_info"
-	"github.com/canary-health/idp/_rpc/profiles"
-	"github.com/canary-health/idp/_rpc/users"
-	"github.com/canary-health/idp/internal/service"
+	"github.com/canary-health/idp/internal/personal_info"
+	personalInfoDatabase "github.com/canary-health/idp/internal/personal_info/infrastructure"
+	personalInfoUsecase "github.com/canary-health/idp/internal/personal_info/usecase"
+	"github.com/canary-health/idp/internal/profile"
+	profileDatabase "github.com/canary-health/idp/internal/profile/infrastructure"
+	profileUsecase "github.com/canary-health/idp/internal/profile/usecase"
+	"github.com/canary-health/idp/internal/user"
+	userDatabase "github.com/canary-health/idp/internal/user/infrastructure"
+	userUsecase "github.com/canary-health/idp/internal/user/usecase"
 
 	"github.com/canary-health/twirp-hooks/promhook"
 	"github.com/etherlabsio/healthcheck"
@@ -33,7 +38,7 @@ func main() {
 	// Create a single logger, which we'll use on all routes.
 	var hooks *twirp.ServerHooks
 	{
-		hooks = promhook.NewServerHooks(os.Getenv("REPO_NAME"))
+		hooks = promhook.NewServerHooks(os.Getenv("APP_NAME"))
 	}
 
 	dburl := os.Getenv("APP_DB_URL") // "postgres://postgres@localhost:5432/canary_health?sslmode=disable&search_path=idp" //
@@ -42,17 +47,21 @@ func main() {
 	if err != nil {
 		logger.Log("msg", twirp.NewError(twirp.Unavailable, "Database unreachable"), "err", err)
 	}
+	var userDB = userDatabase.NewUserDatabase(db, logger)
+	var userUsecase = userUsecase.NewUserUsecase(userDB, logger)
 
-	var usvc = service.NewUserSvc(db, logger)
-	var psvc = service.NewProfileSvc(db, logger)
-	var pisvc = service.NewPersonalInfoSvc(db, logger)
+	var profileDB = profileDatabase.NewProfileDatabase(db, logger)
+	var profileUsecase = profileUsecase.NewProfileUsecase(profileDB, logger)
+
+	var personalInfoDatabase = personalInfoDatabase.NewPersonalInfoDatabase(db, logger)
+	var personaInfoUsecase = personalInfoUsecase.NewPersonalInfoUsecase(personalInfoDatabase, logger)
 
 	// Route handlers
 	mux := http.NewServeMux()
 
-	mux.Handle(users.UsersPathPrefix, users.NewUsersServer(usvc, hooks))
-	mux.Handle(profiles.ProfilesPathPrefix, profiles.NewProfilesServer(psvc, hooks))
-	mux.Handle(personalinfo.PersonalInfoPathPrefix, personalinfo.NewPersonalInfoServer(pisvc, hooks))
+	mux.Handle(user.UserPathPrefix, user.NewUserServer(userUsecase, hooks))
+	mux.Handle(profile.ProfilePathPrefix, profile.NewProfileServer(profileUsecase, hooks))
+	mux.Handle(personalinfo.PersonalInfoPathPrefix, personalinfo.NewPersonalInfoServer(personaInfoUsecase, hooks))
 
 	mux.Handle("/healthcheck", healthcheck.Handler(
 
@@ -87,6 +96,6 @@ func main() {
 		ReadTimeout:  15 * time.Second,
 	}
 
-	logger.Log("msg", os.Getenv("REPO_NAME")+" Server is running on port: "+os.Getenv("SERVER_ADDR"))
+	logger.Log("msg", os.Getenv("APP_NAME")+" Server is running on port: "+os.Getenv("SERVER_ADDR"))
 	logger.Log("err", srv.ListenAndServe())
 }

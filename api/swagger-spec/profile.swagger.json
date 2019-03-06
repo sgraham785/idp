@@ -1,0 +1,145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "profile.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/twirp/canaryhealth.idp.profile.Profile/GetProfileByUserUUID": {
+      "post": {
+        "summary": "GetProfileByUserUUID fetches and returns a PersonalInfo details for the given User UUID",
+        "operationId": "GetProfileByUserUUID",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/profileProfilePayload"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userUserUUID"
+            }
+          }
+        ],
+        "tags": [
+          "Profile"
+        ]
+      }
+    },
+    "/twirp/canaryhealth.idp.profile.Profile/UpsertProfile": {
+      "post": {
+        "summary": "UpsertPersonalInfo inserts or updates a profile wih given options",
+        "operationId": "UpsertProfile",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/userUserUUID"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/profileUpsertProfileOpts"
+            }
+          }
+        ],
+        "tags": [
+          "Profile"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "profileProfilePayload": {
+      "type": "object",
+      "properties": {
+        "user_uuid": {
+          "type": "string"
+        },
+        "screen_name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "archived_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deleted_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "profileUpsertProfileOpts": {
+      "type": "object",
+      "properties": {
+        "user_uuid": {
+          "type": "string"
+        },
+        "screen_name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        }
+      }
+    },
+    "userUserUUID": {
+      "type": "object",
+      "properties": {
+        "user_uuid": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

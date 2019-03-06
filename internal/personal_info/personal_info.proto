@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package canaryhealth.idp.personal_info;
+option go_package = "personalinfo";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+import "google/protobuf/timestamp.proto";
+import "github.com/canary-health/idp/internal/user/user.proto";
+
+import "github.com/canary-health/protobuf/types/atTimestamps.proto";
+import "github.com/canary-health/protobuf/types/uuid.proto";
+import "github.com/canary-health/protobuf/types/listOpts.proto";
+
+// Enable custom Marshal method.
+option (gogoproto.marshaler_all) = true;
+// Enable custom Unmarshal method.
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+
+service PersonalInfo {
+  // UpsertPersonalInfo inserts or updates personal_info wih given options  
+  rpc UpsertPersonalInfo(UpsertPersonalInfoOpts) returns (canaryhealth.idp.user.UserUUID);
+  
+  // GetPersonalInfoByUserUUID fetches and returns a PersonalInfo details for the given User UUID
+  rpc GetPersonalInfoByUserUUID(canaryhealth.idp.user.UserUUID) returns (PersonalInfoPayload);
+  
+}
+
+message UpsertPersonalInfoOpts {
+  string user_uuid = 1 [
+    (gogoproto.customname) = "UserUUID", 
+    (gogoproto.moretags) = "db:\"user_uuid\""
+    ];
+  string first_name = 2[
+    (gogoproto.moretags) = "db:\"first_name\""
+    ];
+  string last_name = 3 [
+    (gogoproto.moretags) = "db:\"last_name\""
+    ];
+  string gender = 4;
+  string birthdate = 5;
+  string phone_number = 6 [
+    (gogoproto.moretags) = "db:\"phone_number\""
+    ];
+  string phone_number_code = 7 [
+    (gogoproto.moretags) = "db:\"phone_number_code\""
+    ];
+  bool phone_number_verified = 8 [
+    (gogoproto.moretags) = "db:\"phone_number_verified\""
+    ];
+  string street_address = 9 [
+    (gogoproto.moretags) = "db:\"street_address\""
+    ];
+  string street_address2 = 10 [
+    (gogoproto.moretags) = "db:\"street_address2\""
+    ];
+  string city = 11;
+  string state_province = 12 [
+    (gogoproto.moretags) = "db:\"state_province\""
+    ];
+  string zip_postal = 13 [
+    (gogoproto.moretags) = "db:\"zip_postal\""
+    ];
+  string country = 14;
+}
+
+message PersonalInfoPayload {
+  string user_uuid = 1 [
+    (gogoproto.customname) = "UserUUID", 
+    (gogoproto.moretags) = "db:\"user_uuid\""
+    ];
+  string first_name = 2[
+    (gogoproto.moretags) = "db:\"first_name\""
+    ];
+  string last_name = 3 [
+    (gogoproto.moretags) = "db:\"last_name\""
+    ];
+  string gender = 4;
+  string birthdate = 5;
+  string phone_number = 6 [
+    (gogoproto.moretags) = "db:\"phone_number\""
+    ];
+  string phone_number_code = 7 [
+    (gogoproto.moretags) = "db:\"phone_number_code\""
+    ];
+  bool phone_number_verified = 8 [
+    (gogoproto.moretags) = "db:\"phone_number_verified\""
+    ];
+  string street_address = 9 [
+    (gogoproto.moretags) = "db:\"street_address\""
+    ];
+  string street_address2 = 10 [
+    (gogoproto.moretags) = "db:\"street_address2\""
+    ];
+  string city = 11;
+  string state_province = 12 [
+    (gogoproto.moretags) = "db:\"state_province\""
+    ];
+  string zip_postal = 13 [
+    (gogoproto.moretags) = "db:\"zip_postal\""
+    ];
+  string country = 14;
+  google.protobuf.Timestamp created_at = 996 [(gogoproto.moretags) = "db:\"created_at\"", (gogoproto.stdtime) = true];
+  google.protobuf.Timestamp updated_at = 997 [(gogoproto.moretags) = "db:\"updated_at\"", (gogoproto.stdtime) = true];
+  google.protobuf.Timestamp archived_at = 998 [(gogoproto.moretags) = "db:\"archived_at\"", (gogoproto.stdtime) = true];  
+  google.protobuf.Timestamp deleted_at = 999 [(gogoproto.moretags) = "db:\"deleted_at\"", (gogoproto.stdtime) = true];  
+}

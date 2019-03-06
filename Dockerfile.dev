@@ -1,4 +1,0 @@
-FROM golang:1.10-alpine
-
-WORKDIR /go/src/github.com/canary-health/idp/
-COPY . .

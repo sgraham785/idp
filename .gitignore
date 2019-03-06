@@ -3,3 +3,4 @@
 _tools
 bin
 coverage.out
+!build

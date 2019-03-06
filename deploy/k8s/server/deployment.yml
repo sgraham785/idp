@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idp-server
+spec:
+  selector:
+    matchLabels:
+      name: idp-server
+      part-of: idp
+      tier: server
+  template:
+    metadata:
+      labels:
+        name: idp-server
+        part-of: idp
+        tier: server
+    spec:
+      containers:
+        - name: idp-server
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 9000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          ports:
+            - containerPort: 9000
+              name: https

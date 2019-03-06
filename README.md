@@ -21,3 +21,13 @@ Stop and destory containers:
 `make compose-down`
 
 ## See [Makefile](./Makefile) for more cmds
+
+## Roles
+
+- member (existing participant role)
+- facilitator (existing)
+- coach (existing)
+- administrator (existing)
+- author (existing)
+- support (new)
+- mentor (new)

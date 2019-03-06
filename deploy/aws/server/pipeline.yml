@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  stack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/canary-cloudformation/docker_pipidpne.yml
+      Parameters:
+        AppName: "idp-server"
+
+        SourceProvider: "GitHub"
+        SourceRepo: "canary-health/idp"
+        SourceBranch: "master"
+        # GitHubToken: "null"
+
+        TestBuildspec: "build/aws/test/buildspec.yml"
+        AcptBuildspec: "build/aws/server/buildspec.yml"
+        AcptDeployspec: "deploy/aws/server/deployspec.yml"
+        ProdDeployspec: "deploy/aws/server/deployspec.yml"
+
+        EnableTestStage: "false"
+        EnableBuildStage: "true"
+        EnableAcptStage: "true"
+        EnableQualityStage: "true"
+        EnablePromoteStage: "true"
+        EnableProdStage: "true"
+Outputs:
+  StackRef:
+    Value: !Ref stack
+  ECRUrl:
+    Value: !GetAtt stack.Outputs.ECRUrl
+  CodePipidpneUrl:
+    Value: !GetAtt stack.Outputs.CodePipidpneUrl
